@@ -37,6 +37,20 @@ class App extends Component {
     })
   }
 
+  onRemove = key => {
+    this.setState({
+      counters: Object.keys(this.state.counters).reduce((acc, keyCounter) => {
+        if (keyCounter !== key) {
+          acc[keyCounter] = this.state.counters[keyCounter]
+          return acc
+        }
+
+        return acc
+      }, {}),
+      totalCounter: this.state.totalCounter - this.state.counters[key].counter
+    })
+  }
+
   onIncrease = key => {
     this.setState({
       counters: {
@@ -85,6 +99,7 @@ class App extends Component {
               {...counters[keyCounter]}
               onIncrease={this.onIncrease}
               onDecrease={this.onDecrease}
+              onRemove={this.onRemove}
             />
           ))}
         </List>

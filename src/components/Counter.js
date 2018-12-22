@@ -18,13 +18,14 @@ const Button = styled.button`
   font-size: 18px;
 `
 
-const Counter = ({ id, title, counter, onIncrease, onDecrease }) => {
+const Counter = ({ id, title, counter, onIncrease, onDecrease, onRemove }) => {
   return (
     <Container>
       <Text>{title}</Text>
       <Button onClick={() => onIncrease(id)}>+</Button>
       <Text>{counter}</Text>
       <Button onClick={() => onDecrease(id)}>-</Button>
+      <Button onClick={() => onRemove(id)}>Remove</Button>
     </Container>
   )
 }
@@ -34,7 +35,8 @@ Counter.propTypes = {
   title: PropTypes.string,
   counter: PropTypes.number,
   onIncrease: PropTypes.func,
-  onDecrease: PropTypes.func
+  onDecrease: PropTypes.func,
+  onRemove: PropTypes.func
 }
 
 export default Counter
