@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 
-import './App.css'
+import Content from '../components/Content'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>Counters </p>
-        </header>
-      </div>
+      <Content>
+        <p>Counters </p>
+      </Content>
     )
   }
 }
