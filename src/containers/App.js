@@ -11,6 +11,33 @@ class App extends Component {
       b: { id: 'b', title: 'Sample Counter', counter: 2 }
     }
   }
+
+  onIncrease = key => {
+    this.setState({
+      counters: {
+        ...this.state.counters,
+        [key]: {
+          ...this.state.counters[key],
+          counter: this.state.counters[key].counter + 1
+        }
+      }
+    })
+  }
+
+  onDecrease = key => {
+    if (this.state.counters[key].counter <= 0) return null
+
+    this.setState({
+      counters: {
+        ...this.state.counters,
+        [key]: {
+          ...this.state.counters[key],
+          counter: this.state.counters[key].counter - 1
+        }
+      }
+    })
+  }
+
   render() {
     const { counters } = this.state
 
@@ -22,6 +49,8 @@ class App extends Component {
             <Counter
               key={keyCounter}
               {...counters[keyCounter]}
+              onIncrease={this.onIncrease}
+              onDecrease={this.onDecrease}
             />
           ))}
         </List>
