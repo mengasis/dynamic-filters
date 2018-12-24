@@ -6,4 +6,8 @@ function getAll() {
   return axios.get(`${baseUrl}/api/v1/counters`)
 }
 
-export default { getAll }
+function create(title) {
+  return axios.post(`${baseUrl}/api/v1/counter`, { title })
+}
+
+export default { getAll, create }
