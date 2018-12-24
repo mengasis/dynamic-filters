@@ -11,9 +11,7 @@ import counterActions from '../actions/counter'
 
 class App extends Component {
   state = {
-    inputText: '',
-    totalCounter: 0,
-    counters: {}
+    inputText: ''
   }
 
   async componentDidMount() {
