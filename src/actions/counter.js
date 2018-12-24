@@ -19,7 +19,10 @@ const deleteCounter = (counter = {}) => ({
 
 const inyectCounters = (counters = []) => ({
   type: INYECT_COUNTERS,
-  counters: toHash(counters, 'id')
+  counters: toHash(counters, 'id'),
+  total: counters.reduce((a, b) => a + b.count, 0)
+})
+
 const increaseCounter = id => ({
   type: INCREASE_COUNTER,
   id

@@ -8,6 +8,8 @@ const initialState = {
 
 function totalReducer(state = initialState.total, action = {}) {
   switch (action.type) {
+    case types.INYECT_COUNTERS:
+      return action.total
     case types.INCREASE_COUNTER:
       return state + 1
     case types.DECREASE_COUNTER:
@@ -23,8 +25,10 @@ function hashCounterReducer(state = initialState.hashCounter, action = {}) {
   switch (action.type) {
     case types.INYECT_COUNTERS:
       return action.counters
+
     case types.ADD_COUNTER:
       return { ...state, [action.counter.id]: action.counter }
+
     case types.REMOVE_COUNTER:
       return Object.keys(state).reduce((acc, keyCounter) => {
         if (keyCounter !== action.counter.id) {
