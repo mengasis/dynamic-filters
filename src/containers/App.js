@@ -29,20 +29,6 @@ class App extends Component {
     this.setState({ inputText: '' })
   }
 
-  onRemove = key => {
-    this.setState({
-      counters: Object.keys(this.state.counters).reduce((acc, keyCounter) => {
-        if (keyCounter !== key) {
-          acc[keyCounter] = this.state.counters[keyCounter]
-          return acc
-        }
-
-        return acc
-      }, {}),
-      totalCounter: this.state.totalCounter - this.state.counters[key].counter
-    })
-  }
-
   onIncrease = key => {
     this.setState({
       counters: {
@@ -73,7 +59,7 @@ class App extends Component {
 
   render() {
     const { inputText, totalCounter } = this.state
-    const { counters = [] } = this.props
+    const { counters = [], onRemove } = this.props
 
     return (
       <Content>
@@ -92,7 +78,7 @@ class App extends Component {
               {...counters[keyCounter]}
               onIncrease={this.onIncrease}
               onDecrease={this.onDecrease}
-              onRemove={this.onRemove}
+              onRemove={onRemove}
             />
           ))}
         </List>
@@ -110,7 +96,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllCounter: () => dispatch(counterActions.getAllCounters()),
-    onCreate: title => dispatch(counterActions.createCounter(title))
+    onCreate: title => dispatch(counterActions.createCounter(title)),
+    onRemove: id => dispatch(counterActions.removeCounter(id))
   }
 }
 
