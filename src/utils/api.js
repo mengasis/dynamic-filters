@@ -10,4 +10,16 @@ function create(title) {
   return axios.post(`${baseUrl}/api/v1/counter`, { title })
 }
 
-export default { getAll, create }
+function remove(id) {
+  return axios.delete(`${baseUrl}/api/v1/counter`, { id })
+}
+
+function inc(id) {
+  return axios.post(`${baseUrl}/api/v1/counter/inc`, { id })
+}
+
+function dec(id) {
+  return axios.post(`${baseUrl}/api/v1/counter/dec`, { id })
+}
+
+export default { getAll, create, remove, inc, dec }
