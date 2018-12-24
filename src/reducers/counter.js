@@ -19,10 +19,12 @@ function totalReducer(state = initialState.total, action = {}) {
   }
 }
 
-function hashCounterReducer(state = initialState.total, action = {}) {
+function hashCounterReducer(state = initialState.hashCounter, action = {}) {
   switch (action.type) {
     case types.INYECT_COUNTERS:
       return action.counters
+    case types.ADD_COUNTER:
+      return { ...state, [action.counter.id]: action.counter }
     default:
       return state
   }

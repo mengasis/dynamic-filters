@@ -27,4 +27,9 @@ const getAllCounters = () => async dispatch => {
   dispatch(inyectCounters(data))
 }
 
-export default { getAllCounters }
+const createCounter = (title = '') => async dispatch => {
+  const { data = [] } = await api.create(title)
+  dispatch(addCounter(data[data.length - 1]))
+}
+
+export default { getAllCounters, createCounter }
