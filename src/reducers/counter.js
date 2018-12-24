@@ -33,6 +33,22 @@ function hashCounterReducer(state = initialState.hashCounter, action = {}) {
         }
         return acc
       }, {})
+
+    case types.INCREASE_COUNTER:
+      return {
+        ...state,
+        [action.id]: { ...state[action.id], count: state[action.id].count + 1 }
+      }
+
+    case types.DECREASE_COUNTER:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          count: state[action.id].count <= 0 ? 0 : state[action.id].count - 1
+        }
+      }
+
     default:
       return state
   }

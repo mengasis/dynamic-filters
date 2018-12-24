@@ -20,6 +20,14 @@ const deleteCounter = (counter = {}) => ({
 const inyectCounters = (counters = []) => ({
   type: INYECT_COUNTERS,
   counters: toHash(counters, 'id')
+const increaseCounter = id => ({
+  type: INCREASE_COUNTER,
+  id
+})
+
+const decreaseCounter = id => ({
+  type: DECREASE_COUNTER,
+  id
 })
 
 const getAllCounters = () => async dispatch => {
@@ -38,4 +46,14 @@ const removeCounter = id => async (dispatch, getState) => {
   dispatch(deleteCounter(counter))
 }
 
-export default { getAllCounters, createCounter, removeCounter }
+const incCounter = id => async dispatch => {
+  await api.inc(id)
+  dispatch(increaseCounter(id))
+}
+
+const decCounter = id => async dispatch => {
+  await api.dec(id)
+  dispatch(decreaseCounter(id))
+}
+
+export default { getAllCounters, createCounter, removeCounter, incCounter, decCounter }
