@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Content from '../components/Content'
 import List from '../components/List'
@@ -6,17 +7,17 @@ import Counter from '../components/Counter'
 import FormCounter from '../components/FormCounter'
 import TotalCounter from '../components/TotalCounter'
 
+import counterActions from '../actions/counter'
+
 class App extends Component {
   state = {
     inputText: '',
     totalCounter: 0,
-    counters: {
-      a: { id: 'a', title: 'AAA', counter: 0 },
-      b: { id: 'b', title: 'BBB', counter: 0 },
-      c: { id: 'c', title: 'CCC', counter: 0 },
-      d: { id: 'd', title: 'DDD', counter: 0 },
-      e: { id: 'e', title: 'EEE', counter: 0 }
-    }
+    counters: {}
+  }
+
+  async componentDidMount() {
+    await this.props.getAllCounter()
   }
 
   handleChange = e => {
@@ -80,7 +81,8 @@ class App extends Component {
   }
 
   render() {
-    const { counters, inputText, totalCounter } = this.state
+    const { inputText, totalCounter } = this.state
+    const { counters = [] } = this.props
 
     return (
       <Content>
@@ -108,4 +110,19 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    counters: state.counter.hashCounter
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllCounter: () => dispatch(counterActions.getAllCounters())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
