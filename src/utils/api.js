@@ -11,7 +11,7 @@ function create(title) {
 }
 
 function remove(id) {
-  return axios.delete(`${baseUrl}/api/v1/counter`, { id })
+  return axios.delete(`${baseUrl}/api/v1/counter`, { data: { id } })
 }
 
 function inc(id) {
