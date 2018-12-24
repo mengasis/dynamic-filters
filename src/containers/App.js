@@ -29,42 +29,14 @@ class App extends Component {
     this.setState({ inputText: '' })
   }
 
-  onIncrease = key => {
-    this.setState({
-      counters: {
-        ...this.state.counters,
-        [key]: {
-          ...this.state.counters[key],
-          counter: this.state.counters[key].counter + 1
-        }
-      },
-      totalCounter: this.state.totalCounter + 1
-    })
-  }
-
-  onDecrease = key => {
-    if (this.state.counters[key].counter <= 0) return null
-
-    this.setState({
-      counters: {
-        ...this.state.counters,
-        [key]: {
-          ...this.state.counters[key],
-          counter: this.state.counters[key].counter - 1
-        }
-      },
-      totalCounter: this.state.totalCounter <= 0 ? 0 : this.state.totalCounter - 1
-    })
-  }
-
   render() {
-    const { inputText, totalCounter } = this.state
-    const { counters = [], onRemove } = this.props
+    const { inputText } = this.state
+    const { counters = {}, total, onRemove, onIncrease, onDecrease } = this.props
 
     return (
       <Content>
         <div>
-          <TotalCounter counter={totalCounter} />
+          <TotalCounter counter={total} />
           <FormCounter
             value={inputText}
             onSubmit={this.onCreate}
@@ -76,8 +48,8 @@ class App extends Component {
             <Counter
               key={keyCounter}
               {...counters[keyCounter]}
-              onIncrease={this.onIncrease}
-              onDecrease={this.onDecrease}
+              onIncrease={onIncrease}
+              onDecrease={onDecrease}
               onRemove={onRemove}
             />
           ))}
@@ -89,7 +61,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    counters: state.counter.hashCounter
+    counters: state.counter.hashCounter,
+    total: state.counter.total
   }
 }
 
@@ -97,7 +70,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllCounter: () => dispatch(counterActions.getAllCounters()),
     onCreate: title => dispatch(counterActions.createCounter(title)),
-    onRemove: id => dispatch(counterActions.removeCounter(id))
+    onRemove: id => dispatch(counterActions.removeCounter(id)),
+    onIncrease: id => dispatch(counterActions.incCounter(id)),
+    onDecrease: id => dispatch(counterActions.decCounter(id))
   }
 }
 
