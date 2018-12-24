@@ -24,18 +24,9 @@ class App extends Component {
     this.setState({ inputText: e.target.value })
   }
 
-  onCreate = () => {
-    this.setState({
-      counters: {
-        ...this.state.counters,
-        [this.state.inputText]: {
-          id: this.state.inputText,
-          title: this.state.inputText,
-          counter: 0
-        }
-      },
-      inputText: ''
-    })
+  onCreate = async () => {
+    await this.props.onCreate(this.state.inputText)
+    this.setState({ inputText: '' })
   }
 
   onRemove = key => {
@@ -118,7 +109,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllCounter: () => dispatch(counterActions.getAllCounters())
+    getAllCounter: () => dispatch(counterActions.getAllCounters()),
+    onCreate: title => dispatch(counterActions.createCounter(title))
   }
 }
 
