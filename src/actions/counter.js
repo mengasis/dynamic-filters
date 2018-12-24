@@ -12,7 +12,7 @@ const addCounter = (counter = {}) => ({
   counter
 })
 
-const removeCounter = (counter = {}) => ({
+const deleteCounter = (counter = {}) => ({
   type: REMOVE_COUNTER,
   counter
 })
@@ -32,4 +32,10 @@ const createCounter = (title = '') => async dispatch => {
   dispatch(addCounter(data[data.length - 1]))
 }
 
-export default { getAllCounters, createCounter }
+const removeCounter = id => async (dispatch, getState) => {
+  await api.remove(id)
+  const counter = getState().counter.hashCounter[id]
+  dispatch(deleteCounter(counter))
+}
+
+export default { getAllCounters, createCounter, removeCounter }
