@@ -5,7 +5,7 @@ const FormCounter = ({ value, onSubmit, onChange }) => {
   return (
     <div>
       <input value={value} onChange={onChange} />
-      <button onClick={onSubmit}>Crear Contador</button>
+      <button onClick={onSubmit}>Add Counter</button>
     </div>
   )
 }
