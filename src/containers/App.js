@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import Content from '../components/Content'
 import List from '../components/List'
 import Counter from '../components/Counter'
-import FormCounter from '../components/FormCounter'
 import TotalCounter from '../components/TotalCounter'
 import Filter from '../components/Filter'
+import Header from '../components/Header'
+
+import InputForm from '../components/InputForm'
 
 import counterActions from '../actions/counter'
 import filterActions from '../actions/filters'
+
+const AddCounter = styled.div`
+  grid-area: addCounter;
+`
 
 class App extends Component {
   state = {
@@ -52,13 +59,17 @@ class App extends Component {
 
     return (
       <Content>
-        <div>
+        <Header>
           <TotalCounter counter={total} />
-          <FormCounter
-            value={inputText}
-            onSubmit={this.onCreate}
-            onChange={this.handleChange}
-          />
+          <AddCounter>
+            <InputForm
+              value={inputText}
+              onSubmit={this.onCreate}
+              onChange={this.handleChange}
+              textButton="Add Counter"
+              colorButton="#63c76a"
+            />
+          </AddCounter>
           <Filter
             onClean={onCleanFilters}
             {...{
@@ -73,9 +84,8 @@ class App extends Component {
               onLowerRange
             }}
           />
-          <span>{`${filterResults} of ${totalResults} results`}</span>
-        </div>
-        <List>
+        </Header>
+        <List {...{ filterResults, totalResults }}>
           {keyCounters.map(keyCounter => (
             <Counter
               key={keyCounter}
