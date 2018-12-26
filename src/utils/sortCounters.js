@@ -1,5 +1,5 @@
 export const orderTypes = {
-  DEFAULT: 'default',
+  DEFAULT: '',
   TITLE_ASC: 'title-asc',
   TITLE_DESC: 'title-desc',
   COUNT_ASC: 'count-asc',

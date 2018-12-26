@@ -9,21 +9,11 @@ const setOrder = order => ({ type: SET_ORDER_SELECTION, order })
 
 const setKeys = keyCounters => ({ type: SET_KEYS_ORDER, keyCounters })
 
-const searchData = query => ({ type: SEARCH_DATA, query })
+const search = query => ({ type: SEARCH_DATA, query })
 
-const search = query => (dispatch, getState) => {
-  dispatch(searchData(query))
+const setUpperRange = upper => ({ type: SET_UPPER_PRICE_RANGE, upper })
 
-  const { hashCounter } = getState().counter
-
-  dispatch(
-    setKeys(
-      Object.keys(hashCounter).filter(key =>
-        hashCounter[key].title.match(new RegExp(`^${query}.*$`))
-      )
-    )
-  )
-}
+const setLowerRange = lower => ({ type: SET_LOWER_PRICE_RANGE, lower })
 
 const clean = () => (dispatch, getState) => {
   const { hashCounter } = getState().counter
@@ -31,4 +21,4 @@ const clean = () => (dispatch, getState) => {
   dispatch({ type: CLEAN_FILTERS, keys: Object.keys(hashCounter) })
 }
 
-export default { setOrder, setKeys, search, clean }
+export default { setOrder, setKeys, search, setUpperRange, setLowerRange, clean }
