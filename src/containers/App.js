@@ -6,8 +6,10 @@ import List from '../components/List'
 import Counter from '../components/Counter'
 import FormCounter from '../components/FormCounter'
 import TotalCounter from '../components/TotalCounter'
+import Filter from '../components/Filter'
 
 import counterActions from '../actions/counter'
+import filterActions from '../actions/filters'
 
 class App extends Component {
   state = {
@@ -29,7 +31,15 @@ class App extends Component {
 
   render() {
     const { inputText } = this.state
-    const { counters = {}, total, onRemove, onIncrease, onDecrease } = this.props
+    const {
+      counters = {},
+      keyCounters = [],
+      total,
+      onRemove,
+      onIncrease,
+      onDecrease,
+      onOrderChange
+    } = this.props
 
     return (
       <Content>
@@ -40,9 +50,10 @@ class App extends Component {
             onSubmit={this.onCreate}
             onChange={this.handleChange}
           />
+          <Filter {...{ onOrderChange }} />
         </div>
         <List>
-          {Object.keys(counters).map(keyCounter => (
+          {keyCounters.map(keyCounter => (
             <Counter
               key={keyCounter}
               {...counters[keyCounter]}
@@ -59,6 +70,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
+    keyCounters: state.filters.keyCounters,
     counters: state.counter.hashCounter,
     total: state.counter.total
   }
@@ -70,7 +82,8 @@ const mapDispatchToProps = dispatch => {
     onCreate: title => dispatch(counterActions.createCounter(title)),
     onRemove: id => dispatch(counterActions.removeCounter(id)),
     onIncrease: id => dispatch(counterActions.incCounter(id)),
-    onDecrease: id => dispatch(counterActions.decCounter(id))
+    onDecrease: id => dispatch(counterActions.decCounter(id)),
+    onOrderChange: order => dispatch(filterActions.setOrder(order))
   }
 }
 
