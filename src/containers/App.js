@@ -36,11 +36,15 @@ class App extends Component {
       keyCounters = [],
       total,
       query,
+      minValue,
+      maxValue,
       onRemove,
       onIncrease,
       onDecrease,
       onOrderChange,
       onSearch,
+      onUpperRange,
+      onLowerRange,
       onCleanFilters
     } = this.props
 
@@ -53,7 +57,18 @@ class App extends Component {
             onSubmit={this.onCreate}
             onChange={this.handleChange}
           />
-          <Filter onClean={onCleanFilters} {...{ query, onSearch, onOrderChange }} />
+          <Filter
+            onClean={onCleanFilters}
+            {...{
+              query,
+              maxValue,
+              minValue,
+              onSearch,
+              onOrderChange,
+              onUpperRange,
+              onLowerRange
+            }}
+          />
         </div>
         <List>
           {keyCounters.map(keyCounter => (
@@ -76,7 +91,9 @@ const mapStateToProps = state => {
     keyCounters: state.filters.keyCounters,
     counters: state.counter.hashCounter,
     total: state.counter.total,
-    query: state.filters.query
+    query: state.filters.query,
+    maxValue: state.filters.upperRange,
+    minValue: state.filters.lowerRange
   }
 }
 
@@ -89,6 +106,8 @@ const mapDispatchToProps = dispatch => {
     onDecrease: id => dispatch(counterActions.decCounter(id)),
     onOrderChange: order => dispatch(filterActions.setOrder(order)),
     onSearch: query => dispatch(filterActions.search(query)),
+    onUpperRange: upperValue => dispatch(filterActions.setUpperRange(upperValue)),
+    onLowerRange: lowerValue => dispatch(filterActions.setLowerRange(lowerValue)),
     onCleanFilters: () => dispatch(filterActions.clean())
   }
 }

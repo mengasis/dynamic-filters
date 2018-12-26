@@ -3,7 +3,16 @@ import PropTypes from 'prop-types'
 
 import { orderTypes } from '../utils/sortCounters'
 
-const Filters = ({ query, onSearch, onOrderChange, onClean }) => {
+const Filters = ({
+  query,
+  minValue,
+  maxValue,
+  onSearch,
+  onOrderChange,
+  onUpperRange,
+  onLowerRange,
+  onClean
+}) => {
   return (
     <div>
       <div>
@@ -23,6 +32,16 @@ const Filters = ({ query, onSearch, onOrderChange, onClean }) => {
         />
       </div>
       <div>
+        <div>
+          <span>Min</span>
+          <input value={minValue} onChange={e => onLowerRange(e.target.value)} />
+        </div>
+        <div>
+          <span>Max</span>
+          <input value={maxValue} onChange={e => onUpperRange(e.target.value)} />
+        </div>
+      </div>
+      <div>
         <button onClick={onClean}>Clean Filters</button>
       </div>
     </div>
@@ -31,9 +50,13 @@ const Filters = ({ query, onSearch, onOrderChange, onClean }) => {
 
 Filters.propTypes = {
   query: PropTypes.string,
+  minValue: PropTypes.string,
+  maxValue: PropTypes.string,
   onSearch: PropTypes.func,
   onOrderChange: PropTypes.func,
-  onClean: PropTypes.func
+  onClean: PropTypes.func,
+  onUpperRange: PropTypes.fun,
+  onLowerRange: PropTypes.func
 }
 
 export default Filters
