@@ -5,6 +5,8 @@ import * as typeFilters from '../actions/filters'
 const initialState = {
   query: '',
   order: '',
+  upperRange: '',
+  lowerRange: '',
   keyCounters: []
 }
 
@@ -25,6 +27,30 @@ function orderReducer(state = initialState.order, action = {}) {
       return action.order || ''
     case typeFilters.CLEAN_FILTERS:
       return initialState.order
+    default:
+      return state
+  }
+}
+
+function upperRangeReducer(state = initialState.upperRange, action = {}) {
+  switch (action.type) {
+    case typeFilters.SET_UPPER_PRICE_RANGE:
+      return action.upper
+
+    case typeFilters.CLEAN_FILTERS:
+      return initialState.upperRange
+    default:
+      return state
+  }
+}
+
+function lowerRangeReducer(state = initialState.lowerRange, action = {}) {
+  switch (action.type) {
+    case typeFilters.SET_LOWER_PRICE_RANGE:
+      return action.lower
+
+    case typeFilters.CLEAN_FILTERS:
+      return initialState.lowerRange
     default:
       return state
   }
@@ -54,5 +80,7 @@ function keyCountersReducer(state = initialState.keyCounters, action = {}) {
 export default combineReducers({
   query: queryReducer,
   order: orderReducer,
+  lowerRange: lowerRangeReducer,
+  upperRange: upperRangeReducer,
   keyCounters: keyCountersReducer
 })
