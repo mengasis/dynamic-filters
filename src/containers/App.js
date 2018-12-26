@@ -36,6 +36,8 @@ class App extends Component {
       keyCounters = [],
       total,
       query,
+      totalResults,
+      filterResults,
       minValue,
       maxValue,
       onRemove,
@@ -63,12 +65,15 @@ class App extends Component {
               query,
               maxValue,
               minValue,
+              totalResults,
+              filterResults,
               onSearch,
               onOrderChange,
               onUpperRange,
               onLowerRange
             }}
           />
+          <span>{`${filterResults} of ${totalResults} results`}</span>
         </div>
         <List>
           {keyCounters.map(keyCounter => (
@@ -93,7 +98,9 @@ const mapStateToProps = state => {
     total: state.counter.total,
     query: state.filters.query,
     maxValue: state.filters.upperRange,
-    minValue: state.filters.lowerRange
+    minValue: state.filters.lowerRange,
+    totalResults: Object.keys(state.counter.hashCounter).length,
+    filterResults: state.filters.keyCounters.length
   }
 }
 

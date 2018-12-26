@@ -55,7 +55,7 @@ Filters.propTypes = {
   onSearch: PropTypes.func,
   onOrderChange: PropTypes.func,
   onClean: PropTypes.func,
-  onUpperRange: PropTypes.fun,
+  onUpperRange: PropTypes.func,
   onLowerRange: PropTypes.func
 }
 
