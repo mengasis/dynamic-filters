@@ -3,8 +3,19 @@ import * as typeCounters from '../actions/counter'
 import * as typeFilters from '../actions/filters'
 
 const initialState = {
+  query: '',
   order: '',
   keyCounters: []
+}
+
+function queryReducer(state = initialState.query, action = {}) {
+  switch (action.type) {
+    case typeFilters.SEARCH_DATA:
+      return action.query
+
+    default:
+      return state
+  }
 }
 
 function orderReducer(state = initialState.order, action = {}) {
@@ -37,6 +48,7 @@ function keyCountersReducer(state = initialState.keyCounters, action = {}) {
 }
 
 export default combineReducers({
+  query: queryReducer,
   order: orderReducer,
   keyCounters: keyCountersReducer
 })
