@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { orderTypes } from '../utils/sortCounters'
 
-const Filters = ({ query, onSearch, onOrderChange }) => {
+const Filters = ({ query, onSearch, onOrderChange, onClean }) => {
   return (
     <div>
       <div>
@@ -22,6 +22,9 @@ const Filters = ({ query, onSearch, onOrderChange }) => {
           placeholder="Insert name of counter here"
         />
       </div>
+      <div>
+        <button onClick={onClean}>Clean Filters</button>
+      </div>
     </div>
   )
 }
@@ -29,7 +32,8 @@ const Filters = ({ query, onSearch, onOrderChange }) => {
 Filters.propTypes = {
   query: PropTypes.string,
   onSearch: PropTypes.func,
-  onOrderChange: PropTypes.func
+  onOrderChange: PropTypes.func,
+  onClean: PropTypes.func
 }
 
 export default Filters
