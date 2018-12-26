@@ -8,8 +8,10 @@ const Filters = ({ onOrderChange }) => {
     <div>
       <div>
         <button onClick={() => onOrderChange(orderTypes.DEFAULT)}>Default</button>
-        <button onClick={() => onOrderChange(orderTypes.TITLE_ASC)}>ASC</button>
-        <button onClick={() => onOrderChange(orderTypes.TITLE_DESC)}>DESC</button>
+        <button onClick={() => onOrderChange(orderTypes.TITLE_ASC)}>TITLE ASC</button>
+        <button onClick={() => onOrderChange(orderTypes.TITLE_DESC)}>TITLE DESC</button>
+        <button onClick={() => onOrderChange(orderTypes.COUNT_ASC)}>COUNT ASC</button>
+        <button onClick={() => onOrderChange(orderTypes.COUNT_DESC)}>COUNT DESC</button>
       </div>
     </div>
   )

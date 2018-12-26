@@ -16,6 +16,11 @@ export default (hash, order) => {
     case orderTypes.TITLE_DESC:
       return [...keys].sort((a, b) => ('' + hash[b].title).localeCompare(hash[a].title))
 
+    case orderTypes.COUNT_ASC:
+      return [...keys].sort((a, b) => hash[b].count - hash[a].count)
+
+    case orderTypes.COUNT_DESC:
+      return [...keys].sort((a, b) => hash[a].count - hash[b].count)
     default:
       return keys
   }
