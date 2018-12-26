@@ -8,9 +8,9 @@ export default store => next => action => {
 
   if (actions.indexOf(action.type) !== -1) {
     const { hashCounter } = store.getState().counter
-    const { order } = store.getState().filters
+    const { order, keyCounters } = store.getState().filters
 
-    store.dispatch(filterActions.setKeys(sortCounters(hashCounter, order)))
+    store.dispatch(filterActions.setKeys(sortCounters(hashCounter, keyCounters, order)))
   }
 
   return nextState

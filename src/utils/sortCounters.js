@@ -6,9 +6,7 @@ export const orderTypes = {
   COUNT_DESC: 'count-desc'
 }
 
-export default (hash, order) => {
-  const keys = Object.keys(hash)
-
+export default (hash, keys, order) => {
   switch (order) {
     case orderTypes.TITLE_ASC:
       return [...keys].sort((a, b) => ('' + hash[a].title).localeCompare(hash[b].title))
