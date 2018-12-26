@@ -12,7 +12,8 @@ function queryReducer(state = initialState.query, action = {}) {
   switch (action.type) {
     case typeFilters.SEARCH_DATA:
       return action.query
-
+    case typeFilters.CLEAN_FILTERS:
+      return initialState.query
     default:
       return state
   }
@@ -22,7 +23,8 @@ function orderReducer(state = initialState.order, action = {}) {
   switch (action.type) {
     case typeFilters.SET_ORDER_SELECTION:
       return action.order || ''
-
+    case typeFilters.CLEAN_FILTERS:
+      return initialState.order
     default:
       return state
   }
@@ -42,6 +44,8 @@ function keyCountersReducer(state = initialState.keyCounters, action = {}) {
     case typeCounters.REMOVE_COUNTER:
       return state.filter(key => key !== action.counter.id)
 
+    case typeFilters.CLEAN_FILTERS:
+      return action.keys
     default:
       return state
   }

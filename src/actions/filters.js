@@ -1,6 +1,7 @@
 export const SET_ORDER_SELECTION = 'FILTERS/SET_ORDER_SELECTION'
 export const SET_KEYS_ORDER = 'FILTERS/SET_KEYS_ORDER'
 export const SEARCH_DATA = 'FILTERS/SEARCH_DATA'
+export const CLEAN_FILTERS = 'FILTERS/CLEAN_FILTERS'
 
 const setOrder = order => ({ type: SET_ORDER_SELECTION, order })
 
@@ -22,4 +23,10 @@ const search = query => (dispatch, getState) => {
   )
 }
 
-export default { setOrder, setKeys, search }
+const clean = () => (dispatch, getState) => {
+  const { hashCounter } = getState().counter
+
+  dispatch({ type: CLEAN_FILTERS, keys: Object.keys(hashCounter) })
+}
+
+export default { setOrder, setKeys, search, clean }
