@@ -35,10 +35,12 @@ class App extends Component {
       counters = {},
       keyCounters = [],
       total,
+      query,
       onRemove,
       onIncrease,
       onDecrease,
-      onOrderChange
+      onOrderChange,
+      onSearch
     } = this.props
 
     return (
@@ -50,7 +52,7 @@ class App extends Component {
             onSubmit={this.onCreate}
             onChange={this.handleChange}
           />
-          <Filter {...{ onOrderChange }} />
+          <Filter {...{ query, onSearch, onOrderChange }} />
         </div>
         <List>
           {keyCounters.map(keyCounter => (
@@ -72,7 +74,8 @@ const mapStateToProps = state => {
   return {
     keyCounters: state.filters.keyCounters,
     counters: state.counter.hashCounter,
-    total: state.counter.total
+    total: state.counter.total,
+    query: state.filters.query
   }
 }
 
@@ -83,7 +86,8 @@ const mapDispatchToProps = dispatch => {
     onRemove: id => dispatch(counterActions.removeCounter(id)),
     onIncrease: id => dispatch(counterActions.incCounter(id)),
     onDecrease: id => dispatch(counterActions.decCounter(id)),
-    onOrderChange: order => dispatch(filterActions.setOrder(order))
+    onOrderChange: order => dispatch(filterActions.setOrder(order)),
+    onSearch: query => dispatch(filterActions.search(query))
   }
 }
 
