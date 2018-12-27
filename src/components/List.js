@@ -23,7 +23,7 @@ const ListElements = styled.ul`
   width: 700px;
   border-radius: 4px;
   overflow: scroll;
-  height: 250px;
+  max-height: 250px;
   padding: 0px 10px;
 `
 
@@ -37,7 +37,9 @@ const List = ({ filterResults, totalResults, children }) => {
 }
 
 List.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.array,
+  filterResults: PropTypes.number,
+  totalResults: PropTypes.number
 }
 
 export default List

@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px 0;
+  max-height: 30px;
 `
 
 const Text = styled.span`
