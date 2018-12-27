@@ -54,7 +54,11 @@ const incCounter = id => async dispatch => {
   dispatch(increaseCounter(id))
 }
 
-const decCounter = id => async dispatch => {
+const decCounter = id => async (dispatch, getState) => {
+  const { hashCounter } = getState().counter
+
+  if (hashCounter[id].count <= 0) return
+
   await api.dec(id)
   dispatch(decreaseCounter(id))
 }
