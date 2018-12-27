@@ -18,6 +18,7 @@ const Range = styled.div`
 
 const Text = styled.span`
   font-size: 14px;
+  color: #fff;
 `
 
 const Ranges = ({ minValue, maxValue, onLowerRange, onUpperRange }) => {

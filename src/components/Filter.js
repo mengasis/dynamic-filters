@@ -13,7 +13,6 @@ const Container = styled.div`
   gap: 10px;
   justify-items: center;
   background: yellow;
-  grid-area: filters;
   width: 100%;
 `
 

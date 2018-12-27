@@ -7,12 +7,13 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  grid-area: total;
+  max-width: 500px;
 `
 
 const Text = styled.span`
   font-weigth: 100;
   font-size: 30px;
+  color: #fff;
 `
 
 const Title = styled(Text)`

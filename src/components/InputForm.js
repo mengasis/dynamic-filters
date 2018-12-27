@@ -30,6 +30,8 @@ const Button = styled.button`
   cursor: pointer;
   background: ${({ background }) => background};
   transition: all 0.2s ease-out, color 0.2s ease-out;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 `
 const InputForm = ({ textButton = '', colorButton, onSubmit, ...restProps }) => {
   return (

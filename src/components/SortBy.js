@@ -29,6 +29,7 @@ const Section = styled.div`
 
 const Label = styled.span`
   font-size: 14px;
+  color: #fff;
 `
 
 const SortBy = ({ onOrderChange }) => {
