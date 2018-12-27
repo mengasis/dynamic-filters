@@ -55,7 +55,7 @@ class Header extends Component {
       maxValue,
       onOrderChange,
       onSearch,
-      onClean,
+      onCleanFilters,
       onUpperRange,
       onLowerRange
     } = this.props
@@ -89,7 +89,7 @@ class Header extends Component {
           <FormGroup label="Ranges">
             <Ranges {...{ minValue, maxValue, onUpperRange, onLowerRange }} />
           </FormGroup>
-          <Button onClick={onClean} background="#007ee2">
+          <Button onClick={onCleanFilters} background="#007ee2">
             Clean Filters
           </Button>
         </Section>
